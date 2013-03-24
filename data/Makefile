@@ -1,8 +1,8 @@
 PREFIX	= /usr/local
 DESTDIR	=
-MKDIR	?= mkdir -p
-INSTALL	?= install
-RM	?= rm -f
+MKDIR	= mkdir -m 0755 -p
+INSTALL	= install
+RM	= rm -f
 
 
 all:
