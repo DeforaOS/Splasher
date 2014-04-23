@@ -42,7 +42,7 @@ distclean: clean
 
 install: $(TARGETS)
 	$(MKDIR) $(DESTDIR)$(BINDIR)
-	$(INSTALL) -m 0755 -- Splasher $(DESTDIR)$(BINDIR)/Splasher
+	$(INSTALL) -m 0755 Splasher $(DESTDIR)$(BINDIR)/Splasher
 
 uninstall:
 	$(RM) -- $(DESTDIR)$(BINDIR)/Splasher
