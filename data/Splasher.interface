@@ -1,6 +1,5 @@
 #$Id$
 service=Splasher
-port=4249
 
 [call::enable]
 ret=INT32

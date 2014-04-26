@@ -1,5 +1,5 @@
 /* $Id$ */
-/* Copyright (c) 2011 Pierre Pronchery <khorben@defora.org> */
+/* Copyright (c) 2010-2014 Pierre Pronchery <khorben@defora.org> */
 /* This file is part of DeforaOS System Splasher */
 /* This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ static AppServer * _appserver;
 /* splasher */
 int splasher(AppServerOptions options)
 {
-	if((_appserver = appserver_new(PACKAGE, options)) == NULL)
+	if((_appserver = appserver_new(options, PACKAGE, NULL)) == NULL)
 	{
 		error_print(PACKAGE);
 		return 1;
@@ -75,7 +75,8 @@ int32_t Splasher_enable(int32_t enabled)
 
 
 /* Splasher_progress */
-int32_t Splasher_progress(uint32_t progress, char const * text)
+int32_t Splasher_progress(AppServerClient * client, uint32_t progress,
+		char const * text)
 {
 	int ret = 0;
 
