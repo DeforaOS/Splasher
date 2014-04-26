@@ -24,6 +24,11 @@
 
 
 
+#variables
+#executables
+APPBROKER="AppBroker"
+
+
 #functions
 #usage
 _usage()
@@ -34,8 +39,12 @@ _usage()
 
 
 #main
-while getopts P: name; do
+clean=0
+while getopts "cP:" name; do
 	case "$name" in
+		c)
+			clean=1
+			;;
 		P)
 			#we can ignore it
 			;;
@@ -51,5 +60,9 @@ if [ $# -ne 1 ]; then
 	exit $?
 fi
 
-APPINTERFACE="${1%%.h}.interface"
-AppBroker -o "$1" "$APPINTERFACE"
+[ "$clean" -ne 0 ] && exit 0
+
+APPINTERFACE="$1"
+APPINTERFACE="${APPINTERFACE##*/}"
+APPINTERFACE="../data/${APPINTERFACE%%.h}.interface"
+$APPBROKER -o "$1" "$APPINTERFACE"
