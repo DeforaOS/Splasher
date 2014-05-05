@@ -29,23 +29,20 @@
 
 
 /* Splasher */
-/* private */
-/* variables */
-static AppServer * _appserver;
-
-
 /* public */
 /* functions */
 /* splasher */
 int splasher(AppServerOptions options)
 {
-	if((_appserver = appserver_new(NULL, options, PACKAGE, NULL)) == NULL)
+	AppServer * appserver;
+
+	if((appserver = appserver_new(NULL, options, PACKAGE, NULL)) == NULL)
 	{
 		error_print(PACKAGE);
 		return 1;
 	}
-	appserver_loop(_appserver);
-	appserver_delete(_appserver);
+	appserver_loop(appserver);
+	appserver_delete(appserver);
 	return 0;
 }
 
