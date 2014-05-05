@@ -24,6 +24,7 @@
 #endif
 #include <System.h>
 #include "splasher.h"
+#include "../data/Splasher.h"
 #include "../config.h"
 
 
@@ -38,7 +39,7 @@ static AppServer * _appserver;
 /* splasher */
 int splasher(AppServerOptions options)
 {
-	if((_appserver = appserver_new(options, PACKAGE, NULL)) == NULL)
+	if((_appserver = appserver_new(NULL, options, PACKAGE, NULL)) == NULL)
 	{
 		error_print(PACKAGE);
 		return 1;
@@ -51,7 +52,7 @@ int splasher(AppServerOptions options)
 
 /* interface */
 /* Splasher_enable */
-int32_t Splasher_enable(int32_t enabled)
+int32_t Splasher_enable(App * app, AppServerClient * asc, uint32_t enabled)
 {
 	int ret = 0;
 
@@ -75,8 +76,8 @@ int32_t Splasher_enable(int32_t enabled)
 
 
 /* Splasher_progress */
-int32_t Splasher_progress(AppServerClient * client, uint32_t progress,
-		char const * text)
+int32_t Splasher_progress(App * app, AppServerClient * client,
+		uint32_t progress, char const * text)
 {
 	int ret = 0;
 
