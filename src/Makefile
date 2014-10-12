@@ -36,6 +36,7 @@ main.o: main.c
 
 clean:
 	$(RM) -- $(../data/Splasher.h_OBJS) $(Splasher_OBJS)
+	./appbroker.sh -c -P "$(PREFIX)" -- "../data/Splasher.h"
 
 distclean: clean
 	$(RM) -- $(TARGETS)
