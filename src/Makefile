@@ -1,4 +1,5 @@
-TARGETS	= ../data/Splasher.h Splasher
+TARGETS	= $(OBJDIR)../data/Splasher.h $(OBJDIR)Splasher
+OBJDIR	=
 PREFIX	= /usr/local
 DESTDIR	=
 BINDIR	= $(PREFIX)/bin
@@ -18,21 +19,21 @@ INSTALL	= install
 
 all: $(TARGETS)
 
-../data/Splasher.h: ../data/Splasher.interface
-	./appbroker.sh -P "$(PREFIX)" -- "../data/Splasher.h"
+$(OBJDIR)../data/Splasher.h: ../data/Splasher.interface
+	./appbroker.sh -P "$(PREFIX)" -- "$(OBJDIR)../data/Splasher.h"
 
-Splasher_OBJS = splasher.o main.o
+Splasher_OBJS = $(OBJDIR)splasher.o $(OBJDIR)main.o
 Splasher_CFLAGS = $(CPPFLAGSF) $(CPPFLAGS) $(CFLAGSF) $(CFLAGS)
 Splasher_LDFLAGS = $(LDFLAGSF) $(LDFLAGS)
 
-Splasher: $(Splasher_OBJS)
-	$(CC) -o Splasher $(Splasher_OBJS) $(Splasher_LDFLAGS)
+$(OBJDIR)Splasher: $(Splasher_OBJS)
+	$(CC) -o $(OBJDIR)Splasher $(Splasher_OBJS) $(Splasher_LDFLAGS)
 
-splasher.o: splasher.c ../data/Splasher.h
-	$(CC) $(Splasher_CFLAGS) -c splasher.c
+$(OBJDIR)splasher.o: splasher.c ../data/Splasher.h
+	$(CC) $(Splasher_CFLAGS) -o $(OBJDIR)splasher.o -c splasher.c
 
-main.o: main.c
-	$(CC) $(Splasher_CFLAGS) -c main.c
+$(OBJDIR)main.o: main.c
+	$(CC) $(Splasher_CFLAGS) -o $(OBJDIR)main.o -c main.c
 
 clean:
 	$(RM) -- $(../data/Splasher.h_OBJS) $(Splasher_OBJS)
@@ -43,7 +44,7 @@ distclean: clean
 
 install: $(TARGETS)
 	$(MKDIR) $(DESTDIR)$(BINDIR)
-	$(INSTALL) -m 0755 Splasher $(DESTDIR)$(BINDIR)/Splasher
+	$(INSTALL) -m 0755 $(OBJDIR)Splasher $(DESTDIR)$(BINDIR)/Splasher
 
 uninstall:
 	$(RM) -- $(DESTDIR)$(BINDIR)/Splasher
